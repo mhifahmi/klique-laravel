@@ -1,0 +1,90 @@
+/* File: resources/css/queue.css */
+body {
+    font-family: 'Arial', sans-serif;
+    color: #000;
+}
+
+.header-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.header-date {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: right;
+}
+
+/* Kotak Antrian Utama */
+.queue-card {
+    background-color: #e0e0e0;
+    height: 100%;
+    min-height: 300px;
+    /* Biar tinggi kalau konten dikit */
+}
+
+.card-header-strip {
+    padding: 15px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.big-number {
+    font-size: 8rem;
+    font-weight: 700;
+    line-height: 1;
+    margin: 20px 0;
+}
+
+.patient-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.card-footer-strip {
+    background-color: #c0c0c0;
+    padding: 10px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+/* List Ruangan Kanan */
+.room-item {
+    background-color: #e0e0e0;
+    margin-bottom: 15px;
+}
+
+.room-header {
+    background-color: #c0c0c0;
+    padding: 8px 15px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+}
+
+.room-doctor {
+    padding: 10px 15px;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* Kotak Bawah (Statistik) */
+.stat-box {
+    background-color: #e0e0e0;
+    text-align: center;
+    padding: 20px 10px;
+    height: 100%;
+}
+
+.stat-title {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.stat-number {
+    font-size: 5rem;
+    font-weight: 600;
+}
