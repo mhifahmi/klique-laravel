@@ -7,16 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Doctor extends Model
 {
-    protected $guarded = ['id'];
-
     use HasFactory;
 
     protected $fillable = [
-        'nama_lengkap',
-        'nomor_sip', // Surat Izin Praktik
+        'fullname',
+        'nik',
+        'sip_number',
+        'birthdate',
+        'phone_number',
+        'gender',
+        'address',
     ];
 
-    // Relasi: Dokter menjaga ruangan
+    protected $casts = [
+        'birthdate' => 'date',
+    ];
+
     public function rooms()
     {
         return $this->hasMany(Room::class);

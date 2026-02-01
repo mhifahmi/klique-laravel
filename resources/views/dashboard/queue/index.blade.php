@@ -1,3 +1,7 @@
-<div>
-    <!-- The whole future lies in uncertainty: live immediately. - Seneca -->
-</div>
+@extends('layouts.dashboard')
+
+@section('title', 'Manajemen Antrian')
+
+@section('content')
+    <livewire:queue-dashboard />
+@endsection

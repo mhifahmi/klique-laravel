@@ -9,17 +9,22 @@ class Patient extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id']; // Membolehkan input semua kolom selain ID
-
     protected $fillable = [
-        'nama_lengkap',
-        'no_telepon',
-        'alamat',
-        'catatan', // Opsional: Riwayat penyakit/keluhan
+        'fullname',
+        'nik',
+        'birthdate',
+        'phone_number',
+        'gender',
+        'address',
+        'note',
     ];
 
-    // Relasi: Satu pasien bisa punya banyak riwayat antrian
-    public function queues() {
+    protected $casts = [
+        'birthdate' => 'date',
+    ];
+
+    public function queues()
+    {
         return $this->hasMany(Queue::class);
     }
 }

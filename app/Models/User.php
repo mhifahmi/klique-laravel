@@ -18,9 +18,9 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'username', // Kita ganti email jadi username sesuai diagram
+        'username',
         'password',
-        'role',     // 'admin' atau 'staff'
+        'role',
     ];
 
     /**

@@ -1,0 +1,130 @@
+:root {
+    /* Color Palette Definition */
+    --primary-blue: #007bff;
+    /* Biru Utama */
+    --primary-green: #28a745;
+    /* Hijau Aksen */
+    --gradient-bg: linear-gradient(135deg, #e0f7fa 0%, #e8f5e9 100%);
+    /* Gradasi Background Halus */
+    --text-dark: #2c3e50;
+    --text-muted: #6c757d;
+    --card-hover-border: #20c997;
+    /* Teal/Hijau Tosca saat hover */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--gradient-bg);
+    color: var(--text-dark);
+    margin: 0;
+    padding: 0;
+}
+
+.main-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.app-title {
+    font-weight: 800;
+    font-size: 3.5rem;
+    margin-bottom: 0.2rem;
+    background: -webkit-linear-gradient(45deg, #007bff, #00b894);
+    /* Text Gradient */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+}
+
+.app-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    margin-bottom: 4rem;
+    font-weight: 400;
+}
+
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+}
+
+.custom-card {
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    /* Border sangat tipis */
+    border-radius: 24px;
+    padding: 50px 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    /* Bayangan halus */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Dekorasi lingkaran di belakang icon */
+.custom-card::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 100px;
+    height: 100px;
+    background: rgba(0, 123, 255, 0.1);
+    border-radius: 50%;
+    transition: all 0.5s ease;
+}
+
+.custom-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 184, 148, 0.15);
+    /* Bayangan kehijauan saat hover */
+    border-color: var(--card-hover-border);
+}
+
+.custom-card:hover::before {
+    transform: scale(8);
+    /* Efek fill halus saat hover */
+    opacity: 0.05;
+}
+
+.icon-wrapper {
+    background: #f8f9fa;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem auto;
+    transition: background 0.3s;
+}
+
+.custom-card:hover .icon-wrapper {
+    background: #e0f2f1;
+    /* Berubah agak kehijauan saat hover */
+}
+
+.card-icon {
+    height: 60px;
+    /* Ukuran icon diperkecil agar proporsional */
+    width: auto;
+    object-fit: contain;
+}
+
+h3 {
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}

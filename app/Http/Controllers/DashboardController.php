@@ -3,20 +3,48 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Queue;
+use App\Models\Room;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        // ... (logika hitung data $totalAntrian, dll) ...
+        $today = Carbon::today();
+        $queuesToday = Queue::whereDate('date', $today)->get();
 
-        // PERHATIKAN INI:
-        // Kita memanggil file yang ada di folder "resources/views/dashboard/index.blade.php"
-        // Penulisannya menggunakan titik (.) sebagai pemisah folder.
-        $totalAntrian = 10;
-        $sisaAntrian = 10;
-        $selesai = 10;
-        $activeQueues = 10;
-        return view('dashboard.index', compact('totalAntrian', 'sisaAntrian', 'selesai', 'activeQueues'));
+        $stats = [
+            'total'     => $queuesToday->count(),
+            'waiting'   => $queuesToday->where('status', 'WAITING')->count(),
+            'completed' => $queuesToday->where('status', 'COMPLETED')->count(),
+            'missed'    => $queuesToday->where('status', 'MISSED')->count(),
+        ];
+
+        $totalRooms = Room::count();
+        $activeRooms = Room::where('status', 'AVAILABLE')->count();
+        $roomAvailability = "{$activeRooms}/{$totalRooms}";
+
+        $currentCall = Queue::whereDate('date', $today)
+            ->where('status', 'CALLED')
+            ->orderBy('updated_at', 'desc')
+            ->first();
+
+        $currentNumber = $currentCall ? $currentCall->queue_number : '-';
+
+        // Data Chart Tren Kunjungan 7 Hari Terakhir
+        // $chartData = Queue::select(DB::raw('DATE(date) as date'), DB::raw('count(*) as total'))
+        //     ->where('date', '>=', Carbon::now()->subDays(6))
+        //     ->groupBy('date')
+        //     ->orderBy('date', 'asc')
+        //     ->pluck('total', 'date');
+
+        return view('dashboard.index', compact(
+            'stats',
+            'roomAvailability',
+            'currentNumber'
+            // ,'chartData'
+        ));
     }
 }

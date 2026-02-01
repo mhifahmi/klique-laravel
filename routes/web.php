@@ -4,52 +4,51 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\QueueController;
 use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
-use Laravel\Fortify\Features;
 use Livewire\Volt\Volt;
 
+// home
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+// public view for queue
 Volt::route('/queue-public', 'queue-public')->name('queue.public');
 
-// auth process
+/**
+ * only can accessed while staff not login
+ * only for login and register page
+ * the register page can removed due system
+ */
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
-    Route::get('/register-staff', [AuthController::class, 'showRegisterForm'])->name('register');
-    Route::post('/register-staff', [AuthController::class, 'register'])->name('register.post');
+    Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+    Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 });
+
+// to logout after login
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// route dashboard
+// dashboard route only for staff to manage data
 Route::middleware(['auth'])->prefix('dashboard')->group(function () {
-
-    // 1. Dashboard Utama
-    // URL: domain.com/dashboard
+    // main dashboard for see graph
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-    // 2. Halaman Operator Antrian (Livewire)
-    // URL: domain.com/dashboard/antrian
-    // Route::get('/queue', [DashboardController::class, 'index'])->name('dashboard-queue');
-    Route::resource('queue', PatientController::class);
+    /*
+     * dashboard for manage queues data
+     * using livewire for syncronous data without load page
+     */
+    Route::get('/queue', [QueueController::class, 'index'])->name('queue.index');
 
-    // otomatis membuat route untuk index, create, store, edit, update, destroy.
-
-    // 3. Manajemen Pasien
-    // URL: domain.com/dashboard/patients
-    // URL: domain.com/dashboard/patients/create
-    // dst...
+    /**
+     * dashboard for manage patients, doctors, and rooms data
+     * using basic laravel view and controller
+     */
     Route::resource('patients', PatientController::class);
-
-    // 4. Manajemen Dokter
-    // URL: domain.com/dashboard/doctors
     Route::resource('doctors', DoctorController::class);
-
-    // 5. Manajemen Ruangan
-    // URL: domain.com/dashboard/rooms
     Route::resource('rooms', RoomController::class);
 });

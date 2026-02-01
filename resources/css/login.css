@@ -1,0 +1,106 @@
+:root {
+    --primary-blue: #007bff;
+    --primary-green: #28a745;
+    --text-dark: #2c3e50;
+}
+
+body,
+html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+}
+
+.row-login {
+    height: 100vh;
+}
+
+/* --- LEFT SIDE (BRANDING) --- */
+.left-side {
+    /* Gambar background klinik yang bersih */
+    background: url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=2053&auto=format&fit=crop') no-repeat center center;
+    background-size: cover;
+    position: relative;
+}
+
+.overlay {
+    /* Gradasi Klique (Biru ke Hijau) dengan transparansi */
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.85) 0%, rgba(40, 167, 69, 0.85) 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 40px;
+}
+
+.logo-circle {
+    width: 80px;
+    height: 80px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.logo-icon {
+    font-size: 2.5rem;
+    background: -webkit-linear-gradient(45deg, #007bff, #00b894);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+/* --- RIGHT SIDE (FORM) --- */
+.right-side {
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 420px;
+    padding: 40px;
+}
+
+/* Custom Floating Label */
+.form-floating>.form-control {
+    border-radius: 12px;
+    border: 2px solid #f1f3f5;
+    background-color: #f8f9fa;
+}
+
+.form-floating>.form-control:focus {
+    border-color: var(--primary-blue);
+    box-shadow: none;
+    background-color: #fff;
+}
+
+.btn-login {
+    background: linear-gradient(90deg, var(--primary-blue), var(--primary-green));
+    border: none;
+    color: white;
+    font-weight: 600;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+    color: white;
+}

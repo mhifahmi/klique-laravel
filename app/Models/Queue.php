@@ -11,25 +11,22 @@ class Queue extends Model
     protected $guarded = ['id'];
 
     protected $fillable = [
-        'nomor_antrian', // A-001, A-002 (Akan digenerate otomatis nanti)
-        'tanggal',       // YYYY-MM-DD
-        'waktu_panggil', // Timestamp saat status berubah jadi 'dipanggil'
-        'waktu_selesai', // Timestamp saat status berubah jadi 'selesai'
-        'status',        // menunggu, dipanggil, dilayani, selesai, terlewat
-        'patient_id',    // FK Pasien
-        'room_id',       // FK Ruangan
-        'user_id',       // FK User (Staf yang mendaftarkan)
+        'queue_number',
+        'patient_id',
+        'room_id',
+        'status',
+        'date',
+        'call_at',
+        'finish_at',
+        'note'
     ];
 
-    // Casting agar 'tanggal' otomatis dianggap object Date oleh Laravel
-    // Agar kolom tanggal otomatis jadi format Date Carbon
     protected $casts = [
         'tanggal' => 'date',
         'waktu_panggil' => 'datetime',
         'waktu_selesai' => 'datetime',
     ];
 
-    // Relasi-relasi
     public function patient()
     {
         return $this->belongsTo(Patient::class);

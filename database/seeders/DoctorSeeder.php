@@ -13,7 +13,6 @@ class DoctorSeeder extends Seeder
      */
     public function run(): void
     {
-        // Bikin 10 Dokter
         for ($i = 1; $i <= 10; $i++) {
             DB::table('doctors')->insert([
                 'fullname' => 'Dr. ' . fake('id_ID')->firstName . ' ' . fake('id_ID')->lastName,

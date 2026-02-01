@@ -4,145 +4,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Klinik Hoyong Damang</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body,
-        html {
-            height: 100%;
-            margin: 0;
-            overflow: hidden;
-        }
+    <title>Login Staff - Klique</title>
+    @vite(['resources/css/bootstrap.min.css', 'resources/css/login.css', 'resources/js/bootstrap.bundle.min.js'])
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-        .row-login {
-            height: 100vh;
-        }
-
-        /* BAGIAN KIRI (GAMBAR) */
-        .left-side {
-            background: url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=2053&auto=format&fit=crop') no-repeat center center;
-            background-size: cover;
-            position: relative;
-        }
-
-        /* Overlay abu-abu transparan biar tulisan terbaca (Sesuai mockup agak gelap) */
-        .overlay {
-            background-color: rgba(255, 255, 255, 0.7);
-            /* Putih transparan */
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        /* BAGIAN KANAN (FORM) */
-        .right-side {
-            background-color: #e0e0e0;
-            /* Warna abu-abu mockup */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .form-container {
-            width: 80%;
-            max-width: 400px;
-        }
-
-        .btn-login {
-            background-color: #d3d3d3;
-            /* Abu-abu gelap tombol */
-            border: none;
-            color: #000;
-            font-weight: bold;
-        }
-
-        .btn-login:hover {
-            background-color: #b0b0b0;
-        }
-
-        .logo-circle {
-            width: 100px;
-            height: 100px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            border: 5px solid #00c853;
-            /* Hijau logo */
-            font-size: 3rem;
-            color: #00c853;
-            font-weight: bold;
-        }
-    </style>
 </head>
 
 <body>
-
     <div class="container-fluid">
         <div class="row row-login">
-
-            <div class="col-md-7 left-side">
+            {{-- left content --}}
+            <div class="col-md-7 col-lg-8 left-side d-none d-md-block">
                 <div class="overlay">
-                    <div class="logo-circle">+</div>
-
-                    <h2 class="fw-bold">Klinik Hoyong Damang</h2>
-                    <p class="fst-italic fs-5">"Mens sana in corpore sano"</p>
-
-                    <div style="position: absolute; bottom: 30px; font-size: 0.9rem;">
-                        Jalan Terusan Belakang Indo April No.76, Kota Bandung
+                    <div class="logo-circle">
+                        <div class="logo-icon">K</div>
                     </div>
+                    <h1 class="fw-bold display-5">{{ config('klinik.name') }} Dashboard</h1>
+                    <p class="fs-5 opacity-75">{{ config('klinik.short_desc') }}</p>
                 </div>
             </div>
-
-            <div class="col-md-5 right-side">
+            {{-- right content --}}
+            <div class="col-md-5 col-lg-4 right-side">
                 <div class="form-container">
-                    <h3 class="text-center mb-5 fw-bold">Masuk ke Aplikasi</h3>
+                    <div class="mb-5">
+                        <h3 class="fw-bold text-dark">Selamat Datang</h3>
+                        <p class="text-muted">Silakan masuk untuk mengakses panel staf.</p>
+                    </div>
 
                     @if ($errors->any())
-                        <div class="alert alert-danger">
-                            {{ $errors->first() }}
+                        <div class="alert alert-danger border-0 shadow-sm rounded-3 mb-4">
+                            <small>{{ $errors->first() }}</small>
                         </div>
                     @endif
 
                     <form action="{{ route('login.post') }}" method="POST">
                         @csrf
 
-                        <div class="mb-4">
-                            <label class="form-label fw-bold">Username</label>
-                            <input type="text" name="username" class="form-control p-3 border-0 shadow-sm"
-                                style="background-color: #dcdcdc;" placeholder="" required
-                                value="{{ old('username') }}">
+                        <div class="form-floating mb-3">
+                            <input type="text" name="username" class="form-control" id="usernameInput"
+                                placeholder="Username" value="{{ old('username') }}" required>
+                            <label for="usernameInput">Username</label>
                         </div>
 
-                        <div class="mb-4">
-                            <label class="form-label fw-bold">Password</label>
-                            <input type="password" name="password" class="form-control p-3 border-0 shadow-sm"
-                                style="background-color: #dcdcdc;" placeholder="" required>
+                        <div class="form-floating mb-4">
+                            <input type="password" name="password" class="form-control" id="passwordInput"
+                                placeholder="Password" required>
+                            <label for="passwordInput">Password</label>
                         </div>
 
-                        <div class="d-grid gap-2 mt-5">
-                            <button type="submit" class="btn btn-login p-3 shadow-sm">Sign In</button>
+                        <div class="d-grid gap-2 mb-4">
+                            <button type="submit" class="btn btn-login">Masuk Aplikasi</button>
                         </div>
 
-                        <div class="text-center mt-3">
-                            <small class="text-muted">Lupa kata sandi? Segera hubungi Admin!</small>
+                        <div class="text-center">
+                            <p class="text-muted small">Belum punya akun? <a href="{{ route('register') }}"
+                                    class="text-decoration-none fw-bold text-primary">Daftar disini</a></p>
                         </div>
                     </form>
+
+                    <div class="mt-5 text-center text-muted" style="font-size: 0.7rem;">
+                        &copy; {{ date('Y') }} Klique App.
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
-
 </body>
 
 </html>

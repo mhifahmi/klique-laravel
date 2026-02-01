@@ -1,7 +1,6 @@
 @props(['route', 'icon'])
 
 @php
-    // Cek apakah route saat ini cocok dengan link ini
     $active = request()->routeIs($route . '*');
     $classes = $active
                 ? 'nav-link active bg-success text-white' // Style Active
